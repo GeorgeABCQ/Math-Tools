@@ -12,17 +12,17 @@ class Game:
         # Exit the game
         while True:
             print("If you win a game, you will get 1 point. If you lose, you will lose 1 point.")
-            print("Type 'exit' to return to the main menu. Type 'score' to show your score. Type anything else to continue ... ")
+            print("Type 'exit' to return to the main menu. Type 'score' to show your score. Type anything else to start the game ... ")
             begin = input("Your choice: ")
 
             if begin == "exit":
-                print("Your score is", score, ".")
+                print("Your score is", str(score), ".")
                 input("Press enter to return to the main menu ... ")
                 return 0
             
             # Show the score
             elif begin == "score":
-                print("Your score is", score, ".")
+                print("Your score is", str(score), ".")
 
             # The game itself
             else:
@@ -48,9 +48,11 @@ class Game:
                     input("Press enter to return to the main menu ... ")
                     break
 
-                print("I'm thinking of a number between", smallnum, "and", bignum, ".")
+                print("I'm thinking of a number between", str(smallnum), "and", str(bignum), ".")
                 time.sleep(0.5)
                 guesstop = input("How much guesses do you want you to have? (0 for no limit, default is 20): ")
+                if guesstop == "0":
+                    guesstop = -1
 
                 # Check if guesstop is a number
                 try:
@@ -64,25 +66,37 @@ class Game:
                 count = 0
 
                 while guess != number and count != guesstop:
-                    guess = int(input("This is your", str(count), "guess out of", str(guesstop), "guesses. Please enter your guess: "))
                     count += 1
+                    if guesstop != -1:
+                        guess = input("guess " + str(count) + " out of " + str(guesstop) + " guesses. Please enter your guess: ")
+                    else:
+                        guess = input("Please enter your guess: ")
+                    try:
+                        guess = int(guess)
+                    except ValueError:
+                        print("Invalid input.")
+                        break
                     # Check if the guess is too high or too low (no equal because it is checked in the win or lose section)
                     if guess < number:
-                        print("The number", guess, "is too low!")
+                        print("The number", str(guess), "is too low!")
                     elif guess > number:
-                        print("The number", guess, "is too high!")
+                        print("The number", str(guess), "is too high!")
                 # Check for win or lose
                 if guess == number:
-                    print("You've guessed it! The number was", number, ". It took you", count, "tries out of", guesstop, "tries.")
+                    if guesstop != -1:
+                        print("You've guessed it! The number was", str(number), ". It took you", str(count), "tries out of", str(guesstop), "tries. You win! +1 score.")
+                    else:
+                        print("You've guessed it! The number was", str(number), ". It took you", str(count), "tries. You win! +1 score.")
                     score += 1
-                else:
-                    print("You've run out of guesses! The number was", number, ".")
+                elif count == guesstop:
+                    print("You've run out of guesses! The number was", str(number), ". You've lost. -1 score.")
                     score -= 1
                 
                 # Ask if the user wants to play again
+                print("Your score is", str(score), ".")
                 askexit = input("Do you want to play again? (Y/N): ")
                 if askexit == "N" or askexit == "n" or askexit == "no" or askexit == "No":
-                    print("Your score is", score, ".")
+                    print("Your score is", str(score), ".")
                     input("Press enter to return to the main menu ... ")
                     break
 
@@ -91,23 +105,22 @@ class Game:
         # Show basic information
         print("Welcome to the Rock, Paper, Scissors game!")
         score = 0
-        while True:
-            print("If you win a game, you will get 1 point. If you lose, you will lose 1 point. If it's a tie, the score won't change.")
-            print("Type 'score' to show your score. Type 'exit' to return to the main menu. Type anything else to start the game ...")
-            userstart = input("Your choice: ")
+        count = 0
+        count = 1
+        print("If you win a game, you will get 1 point. If you lose, you will lose 1 point. If it's a tie, the score won't change.")
+        print("Type 'exit' to return to the main menu. Type anything else to start the game ...")
+        userstart = input("Your choice: ")
 
-            # Exit the game
-            if userstart == "exit":
-                print("Your score is", score, ".")
-                input("Press enter to return to the main menu ... ")
-                break
-            
-            # Show the score
-            elif userstart == "score":
-                print("Your score is", score, ".")
+        # Exit the game
+        if userstart == "exit":
+            print("Your score is", str(score), ".")
+            input("Press enter to return to the main menu ... ")
+            return 0
+
             # The game itself
-            else:
-                user = input("Choose rock, paper, or scissors: ")
+        else:
+            while True:
+                user = input("Round " + str(count) + " . Choose rock, paper, or scissors: ")
                 if user == "rock" or user == "paper" or user == "scissors" or user == "r" or user == "p" or user == "s":
                     comp = random.choice(["rock", "paper", "scissors"])
                     print("The computer chose", comp, ".")
@@ -115,39 +128,41 @@ class Game:
                         print("It's a tie!")
                     elif user == "rock" or user == "r":
                         if comp == "scissors":
-                            print("You win!")
+                            print("You win! +1 score")
                             score += 1
                         else:
-                            print("You lose!")
+                            print("You lose! -1 score.")
                             score -= 1
                     elif user == "paper" or user == "p":
                         if comp == "rock":
-                            print("You win!")
+                            print("You win! +1 score")
                             score += 1
                         else:
-                            print("You lose!")
+                            print("You lose! -1 score.")
                             score -= 1
                     elif user == "scissors" or user == "s":
                         if comp == "paper":
-                            print("You win!")
+                            print("You win! +1 score")
                             score += 1
                         else:
-                            print("You lose!")
+                            print("You lose! -1 score.")
                             score -= 1
+                    count += 1
 
                     # Ask if the user wants to play again
+                    print("Your score is", str(score), ".")
                     askexit = input("Do you want to play again? (Y/N): ")
                     if askexit == "N" or askexit == "n" or askexit == "no" or askexit == "No":
-                        print("Your score is", score, ".")
+                        print("Your score is", str(score), ".")
                         input("Press enter to return to the main menu ... ")
-                        break
+                        return 0
                 
                 #Show the score
                 elif user == "score":
-                    print("Your score is", score, ".")
+                    print("Your score is", str(score), ".")
                 
                 elif user == "exit":
-                    print("Your score is", score, ".")
+                    print("Your score is", str(score), ".")
                     input("Press enter to return to the main menu ... ")
                     break
         return 0
@@ -157,16 +172,15 @@ class Game:
         print("Welcome to the number bomb game!")
         score = 0
         while True:
-            print("Type 'exit' to return to the main menu. Type 'score' to show your score. Type 'rule' to show the rules. Type anything else to start the game ...")
+            print("Type 'exit' to return to the main menu. Type 'rule' to show the rules. Type anything else to start the game ...")
             userstart = input("Your choice: ")
             if userstart == 'exit':
-                print("Your score is", score, ".")
                 input("Press enter to return to the main menu ... ")
                 break
-            elif userstart == 'score':
-                print("Your score is", score, ".")
             elif userstart == 'rule':
-                print("The game is simple. You will try to not guess a number between 1 and 100 against a computer guessing randomly. If you guess the number, you will lose 1 point. You will get 1 point if you don't guess the number in 10 attempts. Each time you guess the number, the area you can guess will be smaller.")
+                print("""The game is simple. You will try to not guess a number between 1 and 100 against a computer guessing randomly.
+                      If you guess the number, you will lose 1 point. You will get 1 point if you don't guess the number in 10 attempts.
+                      Each time you guess the number, the area you can guess will be smaller.""")
             else:
                 bomb = random.randint(1, 100)
                 guess = 0
@@ -174,47 +188,47 @@ class Game:
                 small = 1
                 large = 100
                 while count < 11:
-                    guess = int(input("This is your", str(count), "guess out of 10 guesses. Please enter your guess between", small, "and", large, ": "))
+                    count += 1
+                    guess = input("This is your " + str(count) + " guess out of 10 guesses. Please enter your guess between " + str(small) + " and " + str(large) + " : ")
                     try:
                         guess = int(guess)
                     except ValueError:
                         print("Invalid input.")
                         continue
-                    count += 1
                     if guess == bomb:
-                        print("You've guessed it! The number was", bomb, ".")
+                        print("You've guessed the bomb! The number was", str(bomb), ".")
                         score -= 1
                         break
                     elif guess < small or guess > large:
-                        print("The number is not in the range.")
+                        print("The number you typed is not in the range. Please type a number between", str(small), "and", str(large), ".")
                         continue
                     elif guess != bomb:
                         print("You didn't guessed the bomb.")
                         if guess < bomb:
-                            print("The bomb is higher than", guess, ".")
+                            print("The bomb is higher than", str(guess), ".")
                             small = guess
                         elif guess > bomb:
-                            print("The bomb is lower than", guess, ".")
+                            print("The bomb is lower than", str(guess), ".")
                             large = guess
                     
                     comp = random.randint(small, large)
-                    print("The computer guessed", comp, ".")
+                    print("The computer guessed", str(comp), ".")
                     if comp == bomb:
-                        print("The computer guessed the bomb! You won!")
+                        print("The computer guessed the bomb! You won! +1 score. The number was", str(bomb), ".")
                         score += 1
                         break
                     elif comp < bomb:
-                        print("The computer didn't guessed the bomb. The bomb is higher than", comp, ".")
+                        print("The computer didn't guessed the bomb. The bomb is higher than", str(comp), ".")
                         small = comp
                     elif comp > bomb:
-                        print("The computer didn't guessed the bomb. The bomb is lower than", comp, ".")
+                        print("The computer didn't guessed the bomb. The bomb is lower than", str(comp), ".")
                         large = comp
                 if count == 11:
-                    print("You've run out of guesses! The number was", bomb, ".")
+                    print("You've run out of guesses! The number was", str(bomb), ". You win! +1 score.")
                     score += 1
+                print("Your score is", str(score), ".")
                 askexit = input("Do you want to play again? (Y/N): ")
                 if askexit == "N" or askexit == "n" or askexit == "no" or askexit == "No":
-                    print("Your score is", score, ".")
                     input("Press enter to return to the main menu ... ")
                     break
         return 0
@@ -729,13 +743,13 @@ def menu():
   ╔═════════════════════════════════════════════════════╦════════════════════════════════════════════════════════════╗
   ║  Tools:                                             ║  Games:                                                    ║
   ║   1. Random number generator                        ║   9. Guess the number                                      ║
-  ║   2. Prime dectector                                ║   10. Rock, Paper, Scissors                                ║
-  ║   3. Find the factors                               ║   11. Number Bomb                                          ║
+  ║   2. Prime dectector                                ║   10. Rock, paper, scissors                                ║
+  ║   3. Find the factors                               ║   11. Number bomb                                          ║
   ║   4. Number factorization                           ║                                                            ║
   ║   5. Find the highest common factor (HCF)           ║                                                            ║
   ║   6. Find the lowest common multiple (LCM)          ║                                                            ║
-  ║   7. Coprime dectector                              ║                                                            ║
-  ║   8. Basic Calcaulator                              ║                                                            ║
+  ║   7. Coprime detector                               ║                                                            ║
+  ║   8. Basic calculator                               ║                                                            ║
   ╠═════════════════════════════════════════════════════╩════════════════════════════════════════════════════════════╣
   ║  Notes:                                                                                                          ║
   ║  - Type the number of the tool or game you want to use to use it.                                                ║
@@ -749,6 +763,7 @@ def menu():
     except ValueError:
         if goto == "exit" or goto == "Exit" or goto == "EXIT":
             print("Goodbye!")
+            time.sleep(1)
             return goto
         else:
             print("Invalid input. Please try again.")
