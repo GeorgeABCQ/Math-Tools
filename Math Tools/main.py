@@ -16,6 +16,7 @@ try:
     from lib.menu import menu
     from lib.mathtools.list_to_str import list_to_str
     from lib.mathtools.list_to_str_usingx import list_to_str_usingx
+    from lib.mathtools.draw_graph import draw_graph
 except ModuleNotFoundError:
     print("Error: One or more modules are missing. Please download the program again.")
     ModuleNotFound = True
@@ -30,24 +31,26 @@ if ModuleNotFound == False:
         if menuuser == 1:
             randnum()
         elif menuuser == 2:
-            isprime(False, 0)
+            isprime(False, None)
         elif menuuser == 3:
-            find_factor(False, False, 0)
+            find_factor(False, False, None)
         elif menuuser == 4:
-            int_factorization(False, False, 0)
+            int_factorization(False, False, None)
         elif menuuser == 5:
-            HCF(False, False, 0, 0, False)
+            HCF(False, False, None,None , False)
         elif menuuser == 6:
-            LCM(False, 0, 0)
+            LCM(False, None, None)
         elif menuuser == 7:
-            coprime(False, 0, 0)
+            coprime(False, None, None)
         elif menuuser == 8:
             calcaulator()
         elif menuuser == 9:
-            guess_num()
+            draw_graph(False, None)
         elif menuuser == 10:
-            rps()
+            guess_num()
         elif menuuser == 11:
+            rps()
+        elif menuuser == 12:
             numbomb()
         elif menuuser == "exit":
             break

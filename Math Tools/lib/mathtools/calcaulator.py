@@ -1,4 +1,5 @@
 def calcaulator():
+    import math
     try:
         from lib.mathtools.isprime import isprime
     except ModuleNotFoundError:
@@ -17,9 +18,14 @@ def calcaulator():
         print("Type 'div' to divide two numbers.")
         print("Type 'exp' to find the power of a number.")
         print("Type 'sqrt' to find the square root of a number.")
+        print("Type 'recip' to find the reciprocal of a number.")
         print("Type 'fact' to find the factorial of a number.")
         print("Type 'mod' to find the remainder of two numbers.")
         print("Type 'abs' to find the absolute value of a number.")
+        print("Type 'log' to find the natrual logarithm of a number.")
+        print("Type 'sin' to find the sine of a number.")
+        print("Type 'cos' to find the cosine of a number.")
+        print("Type 'tan' to find the tangent of a number.")
         print("Type 'prime' to check if a number is prime.")
         print("Type 'ans' to show the previous equation's answer.")
         print("Type 'exit' to return to the main menu.")
@@ -129,6 +135,18 @@ def calcaulator():
             else:
                 ans = str(num1 ** 0.5)
             print("The square root of", str(num1), "is", ans, ".")
+        elif choice == "recip":
+            num1 = input("Enter the number: ")
+            try:
+                num1 = float(num1)
+            except ValueError:
+                print("Invalid input.")
+                break
+            if num1 == 0:
+                print("Cannot divide by 0.")
+                break
+            ans = str(1 / num1)
+            print("The reciprocal of", str(num1), "is", ans, ".")
         elif choice == "fact":
             num1 = input("Enter the number: ")
             try:
@@ -177,6 +195,42 @@ def calcaulator():
                 break
             ans = abs(num1)
             print("The absolute value of", num1, "is", ans, ".")
+        elif choice == "log":
+            num1 = input("Enter the number: ")
+            try:
+                num1 = float(num1)
+            except ValueError:
+                print("Invalid input.")
+                break
+            ans = math.log(num1)
+            print("The natural logarithm of", num1, "is", ans, ".")
+        elif choice == "sin":
+            num1 = input("Enter the number: ")
+            try:
+                num1 = float(num1)
+            except ValueError:
+                print("Invalid input.")
+                break
+            ans = math.sin(num1)
+            print("The sine of", num1, "is", ans, ".")
+        elif choice == "cos":
+            num1 = input("Enter the number: ")
+            try:
+                num1 = float(num1)
+            except ValueError:
+                print("Invalid input.")
+                break
+            ans = math.cos(num1)
+            print("The cosine of", num1, "is", ans, ".")
+        elif choice == "tan":
+            num1 = input("Enter the number: ")
+            try:
+                num1 = float(num1)
+            except ValueError:
+                print("Invalid input.")
+                break
+            ans = math.tan(num1)
+            print("The tangent of", num1, "is", ans, ".")
         elif choice == "prime":
             num1 = input("Enter the number: ")
             ans = isprime(True, num1)
