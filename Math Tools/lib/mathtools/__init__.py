@@ -1,0 +1,3 @@
+# The __init__.py tells Python that this directory should be treated as a package. Without this file, Python would not recognize the directories as containing valid packages and will raise an error. So, this file is empty but it is necessary to include it in the directory.
+# The __init__.py file can also be used to import specific modules from the package. For example, if we had a module named module.py in the package directory.
+# Basically, please don't delete this file :\
