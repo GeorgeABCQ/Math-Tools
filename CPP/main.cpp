@@ -1,29 +1,38 @@
+#include <chrono>
 #include <iostream>
 #include <string>
+#include <thread>
 
 #include "lib\Games\guessnum.h"
 #include "lib\Mathtools\isprime.h"
+#include "lib\Mathtools\randnum.h"
 #include "lib\menu.h"
 
 using namespace std;
 
 int main() {
   int choice = -1;
+  int error = 0;
+  int num1;
   while (choice != 0) {
-    int num1;
     choice = menu();
     if (choice == 1) {
       isprime(0, 0);
     } else if (choice == 2) {
+      randnum();
+    } else if (choice == 3) {
       guessnum();
     } else if (choice == 0) {
       cout << "Goodbye!";
-      _sleep(1000);
+      std::this_thread::sleep_for(std::chrono::seconds(1));
     } else {
-      cout << "Invalid choice. Please try again.\n";
-      _sleep(1000);
+      error = 1;
     }
     std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    if (error == 1) {
+      std::cout << "Invalid choice. Please try again.\n";
+      error = 0;
+    }
   }
   return 0;
 }

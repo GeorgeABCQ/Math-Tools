@@ -3,10 +3,12 @@
 int guessnum() {
   int big;
   int trytop;
-  int exit = 1;
+  char exit = '1';
+  int score = 0;
   std::cout << "Welcome to the Guess the Number game!\n";
   while (exit != 0) {
     int tries = 1;
+    std::cout << "Your current score is " << score << ".\n";
     std::cout
         << "What's the highest number you'd like to guess? (default is 100): ";
     std::cin >> big;
@@ -41,6 +43,7 @@ int guessnum() {
       } else if (guess == num) {
         std::cout << "Congratulations! The number is " << num
                   << ". You guessed the number in " << tries << " tries.\n";
+        score += 1;
         break;
       }
       tries++;
@@ -48,12 +51,13 @@ int guessnum() {
     if (tries - 1 == trytop) {
       std::cout << "You lose! The number is " << num
                 << ". Better luck next time!\n";
+      score -= 1;
     }
     std::cout
-        << "Would you like to play again? (type 1 for yes, type any NUMBER "
+        << "Would you like to play again? (type 1 for yes, type anything else "
            "for no) ";
     std::cin >> exit;
-    if (exit != 1) {
+    if (exit != '1') {
       exit = 0;
     }
   }

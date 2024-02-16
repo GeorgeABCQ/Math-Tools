@@ -5,7 +5,7 @@
 // returning 0 means the number is not prime, 1 means it is prime, 2 means it is
 // 1, -1 means it cannot be difined
 int isprime(int dev, int num) {
-  int nothing;
+  char nothing;
   if (dev != 1) {
     std::cout << "Enter a number : ";
     std::cin >> num;
@@ -14,9 +14,8 @@ int isprime(int dev, int num) {
     if (dev != 1) {
       std::cout << "1 is not a prime number nor a composite number."
                 << std::endl;
-      std::cout
-          << "Type any NUMBER and press enter to return to the main menu.";
-      std::cin >> nothing;
+      std::cout << "Press enter to return to the main menu ... ";
+      std::cin.ignore(2);
     }
     return 2;
   } else {
@@ -26,9 +25,8 @@ int isprime(int dev, int num) {
             << num
             << " cannot be defined as a prime number nor a composite number."
             << std::endl;
-        std::cout
-            << "Type any NUMBER and press enter to return to the main menu.";
-        std::cin >> nothing;
+        std::cout << "Press enter to return to the main menu ... ";
+        std::cin.ignore(2);
       }
       return -1;
     } else {
@@ -36,18 +34,16 @@ int isprime(int dev, int num) {
         if (num % i == 0) {
           if (dev != 1) {
             std::cout << num << " is not a prime number." << std::endl;
-            std::cout << "Type any NUMBER and press enter to return to the "
-                         "main menu.";
-            std::cin >> nothing;
+            std::cout << "Press enter to return to the main menu ... ";
+            std::cin.ignore(2);
           }
           return 0;
         }
       }
       if (dev != 1) {
         std::cout << num << " is a prime number." << std::endl;
-        std::cout
-            << "Type any NUMBER and press enter to return to the main menu.";
-        std::cin >> nothing;
+        std::cout << "Press enter to return to the main menu ... ";
+        std::cin.ignore(2);
       }
       return 1;
     }

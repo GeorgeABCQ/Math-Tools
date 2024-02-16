@@ -5,9 +5,10 @@ int menu() {
     \n\
     Tools:\n\
         1. Prime number checker\n\
+        2. Random number generator\n\
     \n\
     Games:\n\
-        2. Guess the number\n\
+        3. Guess the number\n\
     \n\
     Notes:\n\
         Select a tool or game by entering the corresponding number.\n\
