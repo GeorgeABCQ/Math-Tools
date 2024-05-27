@@ -5,7 +5,11 @@
 
 #include "lib\Games\guessnum.h"
 #include "lib\Games\rps.h"
+#include "lib\Mathtools\calc.h"
+#include "lib\Mathtools\coprime.h"
 #include "lib\Mathtools\dpf.h"
+#include "lib\Mathtools\factors.h"
+#include "lib\Mathtools\factorsp.h"
 #include "lib\Mathtools\hcf.h"
 #include "lib\Mathtools\isprime.h"
 #include "lib\Mathtools\randnum.h"
@@ -23,9 +27,9 @@ int main() {
       isprime(0, 0);
     } else if (choice == 2) {
       randnum();
-    } else if (choice == 5) {
+    } else if (choice == 11) {
       guessnum();
-    } else if (choice == 6) {
+    } else if (choice == 12) {
       rps();
     } else if (choice == 3) {
       dpf(0, 0);
@@ -34,6 +38,14 @@ int main() {
     } else if (choice == 0) {
       cout << "Goodbye!";
       std::this_thread::sleep_for(std::chrono::seconds(1));
+    } else if (choice == 10) {
+      calc();
+    } else if (choice == 7) {
+      factorsp(0, 0);
+    } else if (choice == 8) {
+      factors(0, 0);
+    } else if (choice == 9) {
+      coprime(0, 0, 0);
     } else {
       error = 1;
     }

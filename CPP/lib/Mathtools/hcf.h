@@ -11,7 +11,12 @@ int hcf(int dev, int num1, int num2) {
     cin >> num2;
   }
   int hcf;
-  int min = (num1 < num2) ? num1 : num2;
+  int min;
+  if (num1 < num2) {
+    min = num1;
+  } else {
+    min = num2;
+  }
   for (int i = 1; i <= min; i++) {
     if (num1 % i == 0 && num2 % i == 0) {
       hcf = i;
